@@ -35,8 +35,8 @@ class FastaXtractApp(QMainWindow):
         font_data = base64.b64decode(ASSETS['font'])
         QFontDatabase.addApplicationFontFromData(font_data)
             
-        self.setWindowTitle("FASTA-Xtract")
-        self.setMinimumSize(1000, 650)
+        self.setWindowTitle("FASTA/Q-Xtracter")
+        self.setMinimumSize(1000, 700)
         
         # Set Window Icon (Embedded)
         btn_pixmap = QPixmap()
@@ -62,9 +62,10 @@ class FastaXtractApp(QMainWindow):
 
         self.setStyleSheet(f"""
             QMainWindow {{
-                background: qradialgradient(cx:0.5, cy:0, radius:1, fx:0.5, fy:0, 
-                                          stop:0 {self.colors['bg_gradient_start']}, 
-                                          stop:1 {self.colors['bg_gradient_end']});
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, 
+                                          stop:0 #002b21, 
+                                          stop:0.5 #004B3B, 
+                                          stop:1 #021a11);
             }}
             QWidget {{
                 color: {self.colors['text_primary']};
@@ -73,107 +74,107 @@ class FastaXtractApp(QMainWindow):
             QFrame#GlassCard {{
                 background-color: {self.colors['card_bg']};
                 border: 1px solid {self.colors['border_color']};
-                border-radius: 30px;
+                border-radius: 24px;
             }}
             QLabel#HeaderTitle {{
-                font-size: 38px;
-                font-weight: 800;
+                font-size: 42px;
+                font-weight: 900;
                 color: {self.colors['emerald_light']};
                 background: transparent;
+                letter-spacing: -1px;
             }}
             QLabel#HeaderSub {{
-                font-size: 14px;
+                font-size: 13px;
                 font-weight: 700;
-                color: #ffffff;
-                font-style: italic;
-                letter-spacing: 1px;
+                color: rgba(255, 255, 255, 0.8);
+                font-style: normal;
+                letter-spacing: 2px;
                 background: transparent;
             }}
             QTextEdit {{
                 background-color: {self.colors['input_bg']};
                 border: 1px solid {self.colors['border_color']};
-                border-radius: 18px;
+                border-radius: 12px;
                 color: #ffffff;
-                font-family: 'Cascadia Code', monospace;
+                font-family: 'Consolas', monospace;
                 font-size: 13px;
-                font-weight: bold;
-                padding: 12px;
+                padding: 10px;
                 selection-background-color: {self.colors['emerald_main']};
-                selection-color: #ffffff;
-            }}
-            QTextEdit QWidget {{
-                background-color: transparent;
             }}
             QTextEdit:focus {{
                 border: 1px solid {self.colors['emerald_light']};
+                background-color: rgba(8, 93, 54, 0.3);
             }}
             QPushButton#PrimaryBtn {{
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-                                          stop:0 #00a651, stop:1 #008f45);
+                                          stop:0 #50C878, stop:1 #097969);
                 color: #ffffff;
-                font-weight: 700;
+                font-weight: 800;
                 font-size: 14px;
-                border-radius: 20px;
-                padding: 14px;
+                border-radius: 12px;
+                padding: 15px;
                 border: none;
             }}
             QPushButton#PrimaryBtn:hover {{
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-                                          stop:0 #008f45, stop:1 #00a651);
-                border: 1px solid {self.colors['emerald_light']};
+                                          stop:0 #60D888, stop:1 #0A8979);
+            }}
+            QPushButton#PrimaryBtn:pressed {{
+                background: #085D36;
             }}
             QPushButton#SecondaryBtn {{
-                background-color: rgba(148, 1, 40, 0.08);
-                color: {self.colors['royal_crimson']};
+                background-color: rgba(220, 20, 60, 0.1);
+                color: #FF2400;
                 font-weight: 700;
-                font-size: 12px;
-                border-radius: 20px;
+                font-size: 13px;
+                border-radius: 12px;
                 padding: 10px;
-                border: 1px solid rgba(148, 1, 40, 0.3);
+                border: 1px solid rgba(220, 20, 60, 0.3);
             }}
             QPushButton#SecondaryBtn:hover {{
-                background-color: rgba(148, 1, 40, 0.18);
-                border-color: {self.colors['royal_crimson']};
+                background-color: rgba(220, 20, 60, 0.2);
+                border-color: #FF2400;
             }}
             QPushButton#ExportBtn {{
-                background: rgba(255, 255, 255, 0.1);
+                background: rgba(255, 255, 255, 0.05);
                 color: {self.colors['text_primary']};
                 border: 1px solid {self.colors['border_color']};
-                font-weight: 600;
+                font-weight: 700;
                 font-size: 13px;
-                border-radius: 20px;
+                border-radius: 12px;
                 padding: 14px;
             }}
             QPushButton#ExportBtn:enabled {{
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
-                                          stop:0 #00a651, stop:1 #008f45);
+                                          stop:0 #DC143C, stop:1 #940128);
+                color: #ffffff;
                 border: none;
             }}
             QRadioButton {{
-                font-size: 13px;
+                font-size: 12px;
+                font-weight: bold;
                 color: {self.colors['text_secondary']};
-                spacing: 8px;
+                spacing: 10px;
             }}
             QRadioButton::indicator {{
-                width: 20px;
-                height: 20px;
-                border-radius: 10px;
+                width: 18px;
+                height: 18px;
+                border-radius: 9px;
                 border: 2px solid {self.colors['border_color']};
-                background: {self.colors['input_bg']};
+                background: transparent;
             }}
             QRadioButton::indicator:checked {{
-                background-color: {self.colors['royal_crimson']};
-                border: 2px solid {self.colors['royal_crimson']};
+                background-color: {self.colors['emerald_light']};
+                border: 2px solid {self.colors['emerald_light']};
             }}
             QPushButton#UploadBtn {{
                 background-color: rgba(80, 200, 120, 0.1);
                 color: {self.colors['emerald_light']};
                 border: 1px solid rgba(80, 200, 120, 0.3);
-                border-radius: 12px;
-                padding: 6px 15px;
+                border-radius: 8px;
+                padding: 5px 12px;
                 font-size: 10px;
-                font-weight: 700;
-                letter-spacing: 0.5px;
+                font-weight: 800;
             }}
             QPushButton#UploadBtn:hover {{
                 background-color: rgba(80, 200, 120, 0.2);
@@ -182,19 +183,20 @@ class FastaXtractApp(QMainWindow):
             QComboBox {{
                 background-color: {self.colors['input_bg']};
                 border: 1px solid {self.colors['border_color']};
-                border-radius: 10px;
-                padding: 4px 10px;
+                border-radius: 8px;
+                padding: 5px 10px;
                 color: #ffffff;
-                font-size: 11px;
             }}
             QComboBox::drop-down {{
                 border: none;
             }}
             QComboBox QAbstractItemView {{
-                background-color: #050505;
+                background-color: #0d1b1e;
                 color: #ffffff;
                 selection-background-color: {self.colors['emerald_main']};
+                border: 1px solid {self.colors['border_color']};
             }}
+        """)
         """)
 
         self.fasta_data = {}
@@ -222,9 +224,11 @@ class FastaXtractApp(QMainWindow):
         header_text_layout = QVBoxLayout(header_text_container)
         header_text_layout.setContentsMargins(0, 0, 0, 0)
         
-        title_lbl = QLabel("FASTA-Xtract")
+        title_lbl = QLabel("FASTA/Q-Xtracter")
         title_lbl.setObjectName("HeaderTitle")
         
+        self.apply_shadow(title_lbl)
+
         sub_lbl = QLabel("AUTOMATED MULTI-ACCESSION SEQUENCE EXTRACTOR")
         sub_lbl.setObjectName("HeaderSub")
         
@@ -239,6 +243,8 @@ class FastaXtractApp(QMainWindow):
         config_layout = QVBoxLayout(config_box)
         config_layout.setContentsMargins(15, 12, 15, 12)
         config_layout.setSpacing(10)
+
+        self.apply_shadow(config_box)
 
         config_label = QLabel("NCBI DATABASE")
         config_label.setStyleSheet(f"color: white; font-weight: 700; font-size: 11px; margin-bottom: 2px;")
@@ -271,6 +277,8 @@ class FastaXtractApp(QMainWindow):
         left_panel.setObjectName("GlassCard")
         left_layout = QVBoxLayout(left_panel)
         left_layout.setContentsMargins(25, 25, 25, 25)
+        
+        self.apply_shadow(left_panel)
 
         # Matrix Header Row (Title + Selector)
         matrix_header_row = QHBoxLayout()
@@ -410,12 +418,12 @@ class FastaXtractApp(QMainWindow):
         gmail_icon = QLabel("âœ‰")
         gmail_icon.setStyleSheet(f"color: {self.colors['royal_crimson']}; font-size: 16px;")
         
-        gmail_link = QLabel("support@oneresearchhub.in")
+        gmail_link = QLabel("jkbarathias@gmail.com")
         gmail_link.setCursor(Qt.CursorShape.PointingHandCursor)
         gmail_link.setStyleSheet(f"color: {self.colors['text_secondary']}; font-size: 11px; text-decoration: none; border: none; background: transparent;")
         
         def open_mailto(event):
-            QDesktopServices.openUrl(QUrl("mailto:support@oneresearchhub.in"))
+            QDesktopServices.openUrl(QUrl("mailto:jkbarathias@gmail.com"))
             
         gmail_link.mousePressEvent = open_mailto
         
@@ -563,8 +571,8 @@ class FastaXtractApp(QMainWindow):
         def fetch_single_strand(title, ids):
             ids_str = ",".join(ids)
             # NCBI requires tool and email parameters
-            tool = "FASTA-Xtract"
-            email = "support@oneresearchhub.in"
+            tool = "FASTA/Q-Xtracter"
+            email = "jkbarathias@gmail.com"
             url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db={db}&id={ids_str}&rettype={rettype}&retmode=text&tool={tool}&email={email}"
             
             # Retry logic for 429 Too Many Requests
@@ -686,6 +694,14 @@ class FastaXtractApp(QMainWindow):
 
         except Exception as e:
             QMessageBox.critical(self, "IMPORT ERROR", f"Failed to load CSV Core: {str(e)}")
+
+    def apply_shadow(self, widget):
+        shadow = QGraphicsDropShadowEffect(self)
+        shadow.setBlurRadius(20)
+        shadow.setXOffset(0)
+        shadow.setYOffset(10)
+        shadow.setColor(QColor(0, 0, 0, 80))
+        widget.setGraphicsEffect(shadow)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

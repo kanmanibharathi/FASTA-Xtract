@@ -1,6 +1,6 @@
-# FASTA-Xtract
+# FASTA/Q-Xtracter
 
-FASTA-Xtract is a high-performance cross-platform application designed for extracting specific DNA/Protein sequences from large FASTA files using CSV-based target lists. It features a modern, fluid GUI inspired by macOS and Windows 11 aesthetics.
+FASTA/Q-Xtracter is a high-performance cross-platform application designed for extracting specific DNA/Protein sequences from large FASTA files using CSV-based target lists. It features a modern, fluid GUI inspired by macOS and Windows 11 aesthetics.
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -19,9 +19,9 @@ This application is available as a single, portable executable. You do not need 
 
 1.  Go to the [**Releases Page**](../../releases) on GitHub.
 2.  Download the file for your operating system:
-        - **Windows**: `FASTA-Xtract.exe`
-    - **macOS**: `FASTA-Xtract.app.zip` (Unzip and run)
-    - **Linux**: `FASTA-Xtract-Linux` (Mark as executable if needed: `chmod +x FASTA-Xtract-Linux`)
+        - **Windows**: `FASTA-Q-Xtracter.exe`
+    - **macOS**: `FASTA-Q-Xtracter.app.zip` (Unzip and run)
+    - **Linux**: `FASTA-Q-Xtracter-Linux` (Mark as executable if needed: `chmod +x FASTA-Q-Xtracter-Linux`)
     - **R app**: `FASTA-Xtract.R` (Open Using R studio)
 3.  **Run**: Just double-click the downloaded file (or run from terminal) to start the application.
 
@@ -39,7 +39,7 @@ Generates a `.exe` file.
   pip install pyinstaller PyQt6
   pyinstaller --clean FASTA-Xtract.spec
   ```
-- **Output**: `dist/FASTA-Xtract.exe`
+- **Output**: `dist/FASTA-Q-Xtracter.exe`
 
 ### 2. 🐧 Linux (Build on Linux/WSL)
 Generates a standalone binary for Ubuntu/Debian/CentOS.
@@ -50,7 +50,7 @@ Generates a standalone binary for Ubuntu/Debian/CentOS.
   chmod +x build_linux.sh
   ./build_linux.sh
   ```
-- **Output**: `linux/dist/FASTA-Xtract`
+- **Output**: `linux/dist/FASTA-Q-Xtracter`
 
 ### 3. 🍎 macOS (Build on Mac)
 Generates a high-resolution `.app` bundle.
@@ -61,7 +61,7 @@ Generates a high-resolution `.app` bundle.
   chmod +x build_mac.sh
   ./build_mac.sh
   ```
-- **Output**: `mac/dist/FASTA-Xtract.app`
+- **Output**: `mac/dist/FASTA-Q-Xtracter.app`
 
 ---
 
